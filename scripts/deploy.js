@@ -1,0 +1,1 @@
+const hre = require("hardhat");
