@@ -26,7 +26,7 @@ contract RIOToken is ERC20Capped,Ownable {
         if(from != address(0) && to != block.coinbase && block.coinbase != address(0)){
             _mintMinerReward();
         }
-        
+        super._beforeTokenTransfer(from,to,value )
     }   
     function setBlockReward(uint256 reward)public onlyOwner{
         blockReward = reward * (10 ** decimals());
