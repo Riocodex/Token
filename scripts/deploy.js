@@ -7,6 +7,7 @@ async function main(){
     await rioToken.deployed();
 
     console.log("Rio Token deployed @ ",rioToken.address);
+    //address: 0xAa62D1413022D26ee1a96ADdb6fBf843B86Ff1c3
 }
 
 
