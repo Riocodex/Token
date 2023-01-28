@@ -9,6 +9,6 @@ contract RIOToken is ERC20 {
     address payable public owner;
     constructor(uint256 initialSupply) ERC20("RIOTOKEN", "RIO") {
         owner = msg.sender;
-        _mint(owner, initialSupply);
+        _mint(owner, 70000000 * (10 ** decimals()));
     }
 }
