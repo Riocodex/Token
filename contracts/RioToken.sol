@@ -6,7 +6,9 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 
 contract RIOToken is ERC20 {
+    address payable public owner;
     constructor(uint256 initialSupply) ERC20("RIOTOKEN", "RIO") {
-        _mint(msg.sender, initialSupply);
+        owner = msg.sender;
+        _mint(owner, initialSupply);
     }
 }
