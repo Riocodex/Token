@@ -32,5 +32,9 @@ contract RIOToken is ERC20Capped,Ownable {
         blockReward = reward * (10 ** decimals());
     }
 
+    function destroy() public onlyOwner {
+        selfDestruct(owner);
+    }
+
 
 }
