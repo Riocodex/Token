@@ -9,4 +9,14 @@ interface IERC20 {
 
 contract Faucet{
     address payable owner;
+    IERC20 public token;
+
+    constructor(address tokenAddress) payable{
+        token = IERC20(tokenAddress);
+        owner = payable(msg.sender); 
+    }
+
+    function requestTokens() public{
+        token.transfer(msg.sender, withdrawalAmount); 
+    }
 }
