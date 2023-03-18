@@ -27,6 +27,7 @@ describe("nosDog", function() {
     it("Should assign the total supply of tokens to the owner", async function () {
       const ownerBalance = await nosDog.balanceOf(owner.address);
       expect(await nosDog.totalSupply()).to.equal(ownerBalance);
+      console.log(ownerBalance)
     });
 
     it("Should set the max capped supply to the argument provided during deployment", async function () {
