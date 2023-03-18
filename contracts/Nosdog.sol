@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 contract Nosdog is ERC20Burnable {
     address payable public owner;
     uint256 public blockReward;
-    uint256 price = 0.0003;
+    uint256 price = 0.0003 ether;
 
     constructor( uint256 reward) ERC20("Nosdog", "NSD") {
         owner = payable(msg.sender);
