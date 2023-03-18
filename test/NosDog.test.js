@@ -15,7 +15,7 @@ describe("Nosdog", function() {
     Token = await ethers.getContractFactory("Nosdog");
     [owner, addr1, addr2] = await hre.ethers.getSigners();
 
-    nosDog = await Token.deploy(tokenCap, tokenBlockReward);
+    nosDog = await Token.deploy( tokenBlockReward);
   });
 
   describe("Deployment", function () {
@@ -29,11 +29,7 @@ describe("Nosdog", function() {
       console.log(ownerBalance)
     });
 
-    it("Should set the max capped supply to the argument provided during deployment", async function () {
-      const cap = await nosDog.cap();
-      expect(Number(hre.ethers.utils.formatEther(cap))).to.equal(tokenCap);
-    });
-
+    
     it("Should set the blockReward to the argument provided during deployment", async function () {
       const blockReward = await nosDog.blockReward();
       expect(Number(hre.ethers.utils.formatEther(blockReward))).to.equal(tokenBlockReward);
