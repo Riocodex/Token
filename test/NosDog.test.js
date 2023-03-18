@@ -9,13 +9,14 @@ describe("Nosdog", function() {
   let addr1;
   let addr2; 
   let tokenBlockReward = 50;
+  const money = {value: hre.ethers.utils.parseEther("10")};
 
   beforeEach(async function () {
     // Get the ContractFactory and Signers here.
     Token = await ethers.getContractFactory("Nosdog");
     [owner, addr1, addr2] = await hre.ethers.getSigners();
 
-    nosDog = await Token.deploy( tokenBlockReward);
+    nosDog = await Token.deploy(tokenBlockReward,money);
   });
 
   describe("Deployment", function () {
