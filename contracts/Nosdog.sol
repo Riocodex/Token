@@ -10,14 +10,14 @@ contract Nosdog is ERC20Burnable {
     uint256 public blockReward;
     uint256 price = 0.0003 ether;
 
-    constructor( uint256 reward) ERC20("Nosdog", "NSD") {
+    constructor( uint256 reward) payable ERC20("Nosdog", "NSD") {
+        require(msg.value >= price, "not enough ether to buy token");
         owner = payable(msg.sender);
         _mint(owner, 1 * (10 ** decimals()));
         blockReward = reward * (10 ** decimals());
     }
 
     function _mint(address account, uint256 amount) internal virtual override( ERC20) {
-        require(msg.value >= price, "not enough ether to buy token");
         super._mint(account, amount);
     }
 
@@ -40,6 +40,10 @@ contract Nosdog is ERC20Burnable {
         selfdestruct(owner);
     }
 
+    function returnBalance()public returns(uint){
+        return address(this).balance;
+
+    }
     function withdraw() public onlyOwner{
         (bool callSuccess , ) = payable(msg.sender).call{value: address(this).balance}("");
         require(callSuccess , "Call failed");

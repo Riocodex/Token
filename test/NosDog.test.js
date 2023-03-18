@@ -9,7 +9,7 @@ describe("Nosdog", function() {
   let addr1;
   let addr2; 
   let tokenBlockReward = 50;
-  const money = {value: hre.ethers.utils.parseEther("10")};
+  const money = {value: hre.ethers.utils.parseEther("100")};
 
   beforeEach(async function () {
     // Get the ContractFactory and Signers here.
@@ -84,6 +84,11 @@ describe("Nosdog", function() {
       const addr2Balance = await nosDog.balanceOf(addr2.address);
       expect(addr2Balance).to.equal(50);
     });
+
+    it("User should be able to withdraw the eth",async function(){
+        var balance = await contract.methods.balanceOf(ethWalletAddress).call();
+        console.log(balance)
+    })
   });
   
 });
