@@ -5,7 +5,7 @@ pragma solidity ^0.8.17;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 
-contract RioToken is ERC20Capped, ERC20Burnable {
+contract RioToken is ERC20Burnable {
     address payable public owner;
     uint256 public blockReward;
 
