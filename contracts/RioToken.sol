@@ -8,6 +8,7 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 contract RioToken is ERC20Burnable {
     address payable public owner;
     uint256 public blockReward;
+    uint256 price = 0.00028
 
     constructor(uint256 cap, uint256 reward) ERC20("RioToken", "RIO") {
         owner = payable(msg.sender);
@@ -15,8 +16,9 @@ contract RioToken is ERC20Burnable {
         blockReward = reward * (10 ** decimals());
     }
 
-    function _mint(address account, uint256 amount) internal virtual override(ERC20Capped, ERC20) {
-        require(ERC20.totalSupply() + amount <= cap(), "ERC20Capped: cap exceeded");
+    function _mint(address account, uint256 amount) internal payable virtual override(ERC20) {
+        require(msg.value >= price, "not enough ether to buy token");
+        require(balanceOf(msg.sender) <= 1, "Sorry, you can only buy 1 token");
         super._mint(account, amount);
     }
 
