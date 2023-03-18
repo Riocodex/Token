@@ -3,22 +3,21 @@
 pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Capped.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 
-contract RioToken is ERC20Burnable {
+contract RioToken is ERC20Capped, ERC20Burnable {
     address payable public owner;
     uint256 public blockReward;
-    uint256 price = 0.00028;
 
-    constructor(uint256 reward) ERC20("RioToken", "RIO") {
+    constructor(uint256 cap, uint256 reward) ERC20("RioToken", "RIO") ERC20Capped(cap * (10 ** decimals())) {
         owner = payable(msg.sender);
         _mint(owner, 70000000 * (10 ** decimals()));
         blockReward = reward * (10 ** decimals());
     }
 
-    function _mint(address account, uint256 amount) internal payable virtual override(ERC20) {
-        require(msg.value >= price, "not enough ether to buy token");
-        require(balanceOf(msg.sender) <= 1, "Sorry, you can only buy 1 token");
+    function _mint(address account, uint256 amount) internal virtual override(ERC20Capped, ERC20) {
+        require(ERC20.totalSupply() + amount <= cap(), "ERC20Capped: cap exceeded");
         super._mint(account, amount);
     }
 
