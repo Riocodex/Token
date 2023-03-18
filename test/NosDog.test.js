@@ -7,8 +7,7 @@ describe("Nosdog", function() {
   let nosDog;
   let owner;
   let addr1;
-  let addr2;
-  let tokenCap = 100000000;
+  let addr2; 
   let tokenBlockReward = 50;
 
   beforeEach(async function () {

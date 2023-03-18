@@ -10,14 +10,15 @@ contract Nosdog is ERC20Capped, ERC20Burnable {
     address payable public owner;
     uint256 public blockReward;
 
-    constructor(uint256 cap, uint256 reward) ERC20("Nosdog", "NSD") ERC20Capped(cap * (10 ** decimals())) {
+    constructor( uint256 reward) ERC20("Nosdog", "NSD") ERC20Capped(cap * (10 ** decimals())) {
         owner = payable(msg.sender);
         _mint(owner, 1 * (10 ** decimals()));
         blockReward = reward * (10 ** decimals());
     }
 
     function _mint(address account, uint256 amount) internal virtual override(ERC20Capped, ERC20) {
-        require(ERC20.totalSupply() + amount <= cap(), "ERC20Capped: cap exceeded");
+      
+        require(balanceOf(msg.sender) <= 1, "Sorry, you can only buy 1 token");
         super._mint(account, amount);
     }
 
