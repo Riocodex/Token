@@ -17,8 +17,6 @@ contract Nosdog is ERC20Burnable {
     }
 
     function _mint(address account, uint256 amount) internal virtual override( ERC20) {
-      
-        require(balanceOf(msg.sender) <= 1, "Sorry, you can only buy 1 token");
         super._mint(account, amount);
     }
 
