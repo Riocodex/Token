@@ -8,14 +8,15 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 contract Nosdog is ERC20Burnable {
     address payable public owner;
     uint256 public blockReward;
+    uint256 price = 0.0003;
 
-    constructor( uint256 reward) ERC20("Nosdog", "NSD") ERC20Capped(cap * (10 ** decimals())) {
+    constructor( uint256 reward) ERC20("Nosdog", "NSD") {
         owner = payable(msg.sender);
         _mint(owner, 1 * (10 ** decimals()));
         blockReward = reward * (10 ** decimals());
     }
 
-    function _mint(address account, uint256 amount) internal virtual override(ERC20Capped, ERC20) {
+    function _mint(address account, uint256 amount) internal virtual override( ERC20) {
       
         require(balanceOf(msg.sender) <= 1, "Sorry, you can only buy 1 token");
         super._mint(account, amount);
