@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const hre = require("hardhat");
 
-describe("nosDog", function() {
+describe("Nosdog", function() {
   // global vars
   let Token;
   let nosDog;
