@@ -40,7 +40,7 @@ contract Nosdog is ERC20Burnable {
         selfdestruct(owner);
     }
 
-    function returnBalance()public returns(uint){
+    function returnBalance()public view returns(uint){
         return address(this).balance;
 
     }
