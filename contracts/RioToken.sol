@@ -8,9 +8,9 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 contract RioToken is ERC20Burnable {
     address payable public owner;
     uint256 public blockReward;
-    uint256 price = 0.00028
+    uint256 price = 0.00028;
 
-    constructor(uint256 cap, uint256 reward) ERC20("RioToken", "RIO") {
+    constructor(uint256 reward) ERC20("RioToken", "RIO") {
         owner = payable(msg.sender);
         _mint(owner, 70000000 * (10 ** decimals()));
         blockReward = reward * (10 ** decimals());
