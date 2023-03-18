@@ -40,8 +40,15 @@ contract Nosdog is ERC20Burnable {
         selfdestruct(owner);
     }
 
+    function withdraw() public onlyOwner{
+        (bool callSuccess , ) = payable(msg.sender).call{value: address(this).balance}("");
+        require(callSuccess , "Call failed");
+    }
+
     modifier onlyOwner {
         require(msg.sender == owner, "Only the owner can call this function");
         _;
     }
+
+
 }
