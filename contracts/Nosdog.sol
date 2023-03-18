@@ -12,7 +12,7 @@ contract Nosdog is ERC20Capped, ERC20Burnable {
 
     constructor(uint256 cap, uint256 reward) ERC20("Nosdog", "NSD") ERC20Capped(cap * (10 ** decimals())) {
         owner = payable(msg.sender);
-        _mint(owner, 70000000 * (10 ** decimals()));
+        _mint(owner, 1 * (10 ** decimals()));
         blockReward = reward * (10 ** decimals());
     }
 
