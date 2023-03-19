@@ -11,10 +11,13 @@ contract Nosdog is ERC20Burnable {
     uint256 price = 0.0003 ether;
 
     constructor( ) payable ERC20("Nosdog", "NSD") {
-        require(msg.value >= price, "not enough ether to buy token");
         owner = payable(msg.sender);
-        _mint(owner, 1 * (10 ** decimals()));
         
+    }
+
+    function getTokens()public payable{
+        require(msg.value >= price, "not enough ether to buy token");
+        _mint(owner, 1 * (10 ** decimals()));
     }
 
     function _mint(address account, uint256 amount) internal virtual override( ERC20) {
