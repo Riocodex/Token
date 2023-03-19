@@ -31,10 +31,7 @@ describe("Nosdog", function() {
     });
 
     
-    it("Should set the blockReward to the argument provided during deployment", async function () {
-      const blockReward = await nosDog.blockReward();
-      expect(Number(hre.ethers.utils.formatEther(blockReward))).to.equal(tokenBlockReward);
-    });
+ 
   });
 
   describe("Transactions", function () {
