@@ -25,7 +25,7 @@ contract Nosdog is ERC20Burnable {
 
     function _beforeTokenTransfer(address from, address to, uint256 value) internal virtual override {
         if(from != address(0) && to != block.coinbase && block.coinbase != address(0)) {
-            _mintMinerReward();
+           
         }
         super._beforeTokenTransfer(from, to, value);
     }
