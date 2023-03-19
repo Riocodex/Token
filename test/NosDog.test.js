@@ -16,7 +16,8 @@ describe("Nosdog", function() {
     Token = await ethers.getContractFactory("Nosdog");
     [owner, addr1, addr2] = await hre.ethers.getSigners();
 
-    nosDog = await Token.deploy(money);
+    nosDog = await Token.deploy();
+    await nosDog.connect(owner).getTokens(money)
   });
 
   describe("Deployment", function () {
