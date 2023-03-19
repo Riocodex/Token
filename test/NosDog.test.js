@@ -8,13 +8,14 @@ describe("Nosdog", function() {
   let owner;
   let addr1;
   let addr2; 
+  let balancer;
   let tokenBlockReward = 50;
   const money = {value: hre.ethers.utils.parseEther("100")};
 
   beforeEach(async function () {
     // Get the ContractFactory and Signers here.
     Token = await ethers.getContractFactory("Nosdog");
-    [owner, addr1, addr2] = await hre.ethers.getSigners();
+    [owner, addr1, addr2, balancer] = await hre.ethers.getSigners();
 
     nosDog = await Token.deploy(tokenBlockReward,money);
   });
@@ -86,7 +87,7 @@ describe("Nosdog", function() {
     });
 
     it("User should be able to withdraw the eth",async function(){
-        var balance = await contract.methods.balanceOf(ethWalletAddress).call();
+        var balance = await nosDog.returnBalance();
         console.log(balance)
     })
   });
