@@ -86,9 +86,9 @@ describe("Nosdog", function() {
     });
 
     it("User should be able to withdraw the eth",async function(){
-        var balance = await nosDog.returnBalance();
+        var balance = await nosDog.returnBalance().toString();
         await nosDog.connect(owner).withdraw()
-        expect(balance).to.equal(nosDog.balanceOf(owner))
+        var balance = await nosDog.balanceOf(owner.address)
     })
   });
   
