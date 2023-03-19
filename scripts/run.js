@@ -1,7 +1,7 @@
 const main = async()=>{
     try{
         const nosDogFactory = await hre.ethers.getContractFactory("Nosdog")
-        const nosDog = await nosDogFactory.deploy(100)
+        const nosDog = await nosDogFactory.deploy()
         await nosDog.deployed()
         console.log("contract deployed to: ",nosDog.address)
         process.exit(0)
