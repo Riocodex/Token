@@ -8,8 +8,8 @@ describe("Nosdog", function() {
   let owner;
   let addr1;
   let addr2; 
-  let tokenBlockReward = 50;
-  const money = {value: hre.ethers.utils.parseEther("100")};
+  
+  const money = {value: hre.ethers.utils.parseEther("5")};
 
   beforeEach(async function () {
     // Get the ContractFactory and Signers here.
@@ -84,9 +84,11 @@ describe("Nosdog", function() {
     });
 
     it("User should be able to withdraw the eth",async function(){
-        var balance = await nosDog.returnBalance().toString();
+        var balance = await nosDog.returnBalance();
+        console.log("balance before withdrawal: ",balance)
         await nosDog.connect(owner).withdraw()
-        var balance = await nosDog.balanceOf(owner.address)
+        var balanceFinal = await nosDog.balanceOf(owner.address)
+        console.log( "balance after withdrawal:", balance)
     })
   });
   
