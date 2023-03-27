@@ -84,6 +84,7 @@ describe("Nosdog", function() {
     });
 
     it("User should be able to withdraw the eth",async function(){
+        await nosDog.connect(owner).getTokens(money)
         var balance = await nosDog.returnBalance();
         console.log("balance before withdrawal: ",balance)
         await nosDog.connect(owner).withdraw()
