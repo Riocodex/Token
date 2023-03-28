@@ -8,7 +8,6 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 contract Nosdog is ERC20Burnable {
     address payable public owner;
     uint256 public blockReward;
-    uint256 price = 0.0003 ether;
 
     constructor( ) payable ERC20("Nosdog", "NSD") {
         owner = payable(msg.sender);
@@ -16,7 +15,7 @@ contract Nosdog is ERC20Burnable {
     }
 
     function getTokens()public payable{
-        require(msg.value >= price, "not enough ether to buy token");
+        require(msg.value > 0, "not enough ether to buy token");
         _mint(owner, 1 * (10 ** decimals()));
     }
 
