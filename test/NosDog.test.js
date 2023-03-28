@@ -18,13 +18,13 @@ describe("Nosdog", function() {
 
     nosDog = await Token.deploy();
 
-    var balanceFinal = await nosDog.balanceOf(owner.address)
-    console.log( "balance after buying:", balance)
-    
+    var starterBalance = await nosDog.balanceOf(owner.address)
+    console.log( "balance after buying:", starterBalance)
+
     await nosDog.connect(owner).getTokens(money)
 
-    var balanceFinal = await nosDog.balanceOf(owner.address)
-    console.log( "balance after buying:", balance)
+    var finalBalance = await nosDog.balanceOf(owner.address)
+    console.log( "balance after buying:", finalBalance)
   });
 
   describe("Deployment", function () {
