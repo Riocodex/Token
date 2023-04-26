@@ -39,7 +39,7 @@ contract Faucet{
     }
 
     function getBalance() external view returns(uint256){
-        token.balanceOf(address(this));
+        return token.balanceOf(address(this));
     }
 
     function setWithdrawalAmount(uint256 amount) public onlyOwner {
