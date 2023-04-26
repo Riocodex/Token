@@ -17,14 +17,7 @@ describe("Nosdog", function() {
     [owner, addr1, addr2] = await hre.ethers.getSigners();
 
     nosDog = await Token.deploy();
-
-    var starterBalance = await nosDog.balanceOf(owner.address)
-    console.log( "balance after buying:", starterBalance)
-
     await nosDog.connect(owner).getTokens(money)
-
-    var finalBalance = await nosDog.balanceOf(owner.address)
-    console.log( "balance after buying:", finalBalance)
   });
 
   describe("Deployment", function () {
