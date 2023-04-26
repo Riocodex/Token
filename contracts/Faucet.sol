@@ -12,6 +12,9 @@ contract Faucet{
     IERC20 public token;
 
     uint256 public withdrawalAmount = 50 * (10**18);
+    
+
+    mapping(address => uint256) nextAccessTime;
     constructor(address tokenAddress) payable{
         token = IERC20(tokenAddress);
         owner = payable(msg.sender); 
