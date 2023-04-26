@@ -40,5 +40,7 @@ contract Faucet{
         token.balanceOf(address(this));
     }
 
-    
+    function setWithdrawalAmount(uint256 amount) public onlyOwner {
+        withdrawalAmount = amount * (10**18);
+    }
 }
