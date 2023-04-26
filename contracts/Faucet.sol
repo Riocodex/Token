@@ -18,7 +18,9 @@ contract Faucet{
     }
 
     function requestTokens() public{
+        //checking if the request is coming from an original account
         require(msg.sender != address(0), "Request must not originate from a zero Account");
+        require(token.balanceOf(address(this)) >= withdrawalAmount, "Insufficient balance in faucet for withdrawal")
         token.transfer(msg.sender, withdrawalAmount); 
     }
 }
