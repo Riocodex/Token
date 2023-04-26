@@ -51,6 +51,7 @@ contract Faucet{
     }
 
     function withdrawal() external onlyOwner{
+        emit Withdrawl(msg.sender, token.balanceOf(address(this)));
         token.transfer(msg.sender, token.balanceOf(address(this)));
     }
 
