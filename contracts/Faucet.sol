@@ -46,5 +46,6 @@ contract Faucet{
 
     modifier onlyOnwer() {
         require(msg.sender == owner, "only the contract owner can call this function");
+        _;
     }
 }
