@@ -44,6 +44,14 @@ contract Faucet{
         withdrawalAmount = amount * (10**18);
     }
 
+    function setLockTime(uint256 amount) public onlyOwner {
+        lockTime = amount * 1 minutes;
+    }
+
+    funtion withdrawal() external onlyOwner{
+        token.transfer(msg.sender, token.balanceOf(address(this)));
+    }
+
     modifier onlyOnwer() {
         require(msg.sender == owner, "only the contract owner can call this function");
         _;
