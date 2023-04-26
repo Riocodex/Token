@@ -35,4 +35,10 @@ contract Faucet{
     receive() external payable {
         emit Deposit(msg.sender, msg.value);
     }
+
+    function getBalance() external view returns(uint256){
+        token.balanceOf(address(this));
+    }
+
+    
 }
