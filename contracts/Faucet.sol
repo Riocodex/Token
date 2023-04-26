@@ -43,4 +43,8 @@ contract Faucet{
     function setWithdrawalAmount(uint256 amount) public onlyOwner {
         withdrawalAmount = amount * (10**18);
     }
+
+    modifier onlyOnwer() {
+        require(msg.sender == owner, "only the contract owner can call this function");
+    }
 }
