@@ -2,7 +2,7 @@ const hre = require("hardhat");
 
 async function main(){
     const Faucet = await hre.ethers.getContractFactory("RioToken");
-    const faucet = await Faucet.deploy(100000000, 50);
+    const faucet = await Faucet.deploy("0x90d61929B89441113fa06DC1B74Df2eAc877e9e9");
 
     await faucet.deployed();
 
