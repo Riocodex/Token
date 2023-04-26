@@ -14,6 +14,8 @@ contract Faucet{
     uint256 public withdrawalAmount = 50 * (10**18);
     uint256 public lockTime = 1 minutes;
 
+    event Deposit(address from, uint256 amount);
+
     mapping(address => uint256) nextAccessTime;
     constructor(address tokenAddress) payable{
         token = IERC20(tokenAddress);
@@ -28,5 +30,9 @@ contract Faucet{
 
         nextAccessTime[msg.sender] = block.timestamp + lockTime; 
         token.transfer(msg.sender, withdrawalAmount); 
+    }
+
+    receive() external payable {
+        emit Deposit(msg.sender, msg.value);
     }
 }
