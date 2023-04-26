@@ -15,6 +15,7 @@ contract Faucet{
     uint256 public withdrawalAmount = 50 * (10**18);
     uint256 public lockTime = 1 minutes;
 
+    event Withdrawl(address indexed to, uint256 indexed amount);
     event Deposit(address from, uint256 amount);
 
     mapping(address => uint256) nextAccessTime;
