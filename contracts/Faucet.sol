@@ -25,6 +25,8 @@ contract Faucet{
         require(msg.sender != address(0), "Request must not originate from a zero Account");
         require(token.balanceOf(address(this)) >= withdrawalAmount, "Insufficient balance in faucet for withdrawal");
         require(block.timestamp >= nextAccessTime[msg.sender],"insufficient time elapsed since last withdraw - try again later");
+
+        nextAccessTime[msg.sender] = block.timestamp + lockTime; 
         token.transfer(msg.sender, withdrawalAmount); 
     }
 }
