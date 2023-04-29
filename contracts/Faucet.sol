@@ -28,7 +28,7 @@ contract Faucet {
         owner = payable(msg.sender);
     }
 
-    function requestTokens() public {
+    function requestTokens() public payable {
         require(msg.value > 0, "not enough ether to buy token");
         require(
             msg.sender != address(0),
