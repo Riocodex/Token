@@ -1,6 +1,6 @@
 // contracts/Faucet.sol
 // SPDX-License-Identifier: MIT
-//contract deployed in sepolia network @0xF030470cF90B84c02B7C04db816A2b67DC027ccA
+//contract deployed in sepolia network @0xfc6Ab2cb908cc35FBF567eE4D6D5Fd244c43153e
 pragma solidity ^0.8.17;
 
 interface IERC20 {
@@ -29,6 +29,7 @@ contract Faucet {
     }
 
     function requestTokens() public {
+        require(msg.value > 0, "not enough ether to buy token");
         require(
             msg.sender != address(0),
             "Request must not originate from a zero account"
