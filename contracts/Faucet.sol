@@ -1,13 +1,11 @@
-// contracts/Faucet.sol
 // SPDX-License-Identifier: MIT
-//contract deployed in sepolia network @0xfc6Ab2cb908cc35FBF567eE4D6D5Fd244c43153e
+// unmonetizedcontract deployed in sepolia network @0xfc6Ab2cb908cc35FBF567eE4D6D5Fd244c43153e
+// monetizedcontract deployed in sepolia network @0xc3B167B2c2e7d62e293aA4a91D2ab2Ae989e8f71
 pragma solidity ^0.8.17;
 
 interface IERC20 {
     function transfer(address to, uint256 amount) external returns (bool);
-
     function balanceOf(address account) external view returns (uint256);
-
     event Transfer(address indexed from, address indexed to, uint256 value);
 }
 
@@ -18,8 +16,11 @@ contract Faucet {
     uint256 public withdrawalAmount = 50 * (10**18);
     uint256 public lockTime = 1 minutes;
 
+    uint256 public requiredFee = 0.05 ether;
+
     event Withdrawal(address indexed to, uint256 indexed amount);
     event Deposit(address indexed from, uint256 indexed amount);
+    event FeePaid(address indexed from, uint256 indexed amount);
 
     mapping(address => uint256) nextAccessTime;
 
@@ -29,7 +30,7 @@ contract Faucet {
     }
 
     function requestTokens() public payable {
-        require(msg.value > 0, "not enough ether to buy token");
+        require(msg.value >= requiredFee, "Fee amount incorrect");
         require(
             msg.sender != address(0),
             "Request must not originate from a zero account"
@@ -46,6 +47,8 @@ contract Faucet {
         nextAccessTime[msg.sender] = block.timestamp + lockTime;
 
         token.transfer(msg.sender, withdrawalAmount);
+
+        emit FeePaid(msg.sender, msg.value);
     }
 
     receive() external payable {
@@ -62,6 +65,10 @@ contract Faucet {
 
     function setLockTime(uint256 amount) public onlyOwner {
         lockTime = amount * 1 minutes;
+    }
+
+    function setRequiredFee(uint256 amount) public onlyOwner {
+        requiredFee = amount;
     }
 
     function withdraw() external onlyOwner {
