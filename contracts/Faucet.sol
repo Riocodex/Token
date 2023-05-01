@@ -30,7 +30,7 @@ contract Faucet {
     }
 
     function requestTokens() public payable {
-        require(msg.value == requiredFee, "Fee amount incorrect");
+        require(msg.value > 0, "not enough ether to buy token");    
         require(
             msg.sender != address(0),
             "Request must not originate from a zero account"
