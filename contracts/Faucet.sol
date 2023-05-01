@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // unmonetizedcontract deployed in sepolia network @0xfc6Ab2cb908cc35FBF567eE4D6D5Fd244c43153e
-// monetizedcontract deployed in sepolia network @0xc3B167B2c2e7d62e293aA4a91D2ab2Ae989e8f71
+// monetizedcontract deployed in sepolia network @0xf2E10029039C9DDe40832C96F4d0bdb4cd2D7461
 pragma solidity ^0.8.17;
 
 interface IERC20 {
@@ -30,7 +30,7 @@ contract Faucet {
     }
 
     function requestTokens() public payable {
-        require(msg.value >= requiredFee, "Fee amount incorrect");
+        require(msg.value == requiredFee, "Fee amount incorrect");
         require(
             msg.sender != address(0),
             "Request must not originate from a zero account"
