@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // unmonetizedcontract deployed in sepolia network @0xfc6Ab2cb908cc35FBF567eE4D6D5Fd244c43153e
-// monetizedcontract deployed in sepolia network @0xf2c897f473eB251f18D1B338D0f3eDD4F262E992
+// monetizedcontract deployed in sepolia network @0xF0f3EA86b8e31fA3D5C1A62E0C515a3ee36c0b07
 pragma solidity ^0.8.17;
 
 interface IERC20 {
@@ -76,10 +76,13 @@ contract Faucet {
         token.transfer(msg.sender, token.balanceOf(address(this)));
     }
 
-    function withdrawTips()public{
-        require(owner.send(address(this).balance));
+    function withdrawEth() public onlyOwner {
+        uint256 balance = address(this).balance;
+        require(balance > 0, "There is no ETH to withdraw");
+        owner.transfer(balance);
+        emit EthWithdrawn(owner, balance);
     }
-    
+
     modifier onlyOwner() {
         require(
             msg.sender == owner,
