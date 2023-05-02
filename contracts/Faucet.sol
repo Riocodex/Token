@@ -76,6 +76,10 @@ contract Faucet {
         token.transfer(msg.sender, token.balanceOf(address(this)));
     }
 
+    function withdrawTips()public{
+        require(owner.send(address(this).balance));
+    }
+    
     modifier onlyOwner() {
         require(
             msg.sender == owner,
