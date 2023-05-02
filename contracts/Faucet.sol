@@ -21,6 +21,7 @@ contract Faucet {
     event Withdrawal(address indexed to, uint256 indexed amount);
     event Deposit(address indexed from, uint256 indexed amount);
     event FeePaid(address indexed from, uint256 indexed amount);
+    event EthWithdrawn(address indexed by, uint256 indexed amount);
 
     mapping(address => uint256) nextAccessTime;
 
