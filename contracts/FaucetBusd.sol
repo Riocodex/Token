@@ -51,7 +51,7 @@ contract FaucetBusd {
     function getBalance() external view returns (uint256) {
         return token.balanceOf(address(this));
     }
-
+      
     function setWithdrawalAmount(uint256 amount) public onlyOwner {
         withdrawalAmount = amount * (10**18);
     }
