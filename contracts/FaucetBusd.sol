@@ -9,13 +9,12 @@ interface IERC20 {
     event Transfer(address indexed from, address indexed to, uint256 value);
 }
 
-contract Faucet {
+contract FaucetBusd {
     address payable owner;
     IERC20 public token;
 
     uint256 public withdrawalAmount = 50 * (10**18);
     uint256 public lockTime = 1 minutes;
-
 
     event Withdrawal(address indexed to, uint256 indexed amount);
     event Deposit(address indexed from, uint256 indexed amount);
@@ -29,8 +28,7 @@ contract Faucet {
         owner = payable(msg.sender);
     }
 
-    function requestTokens() public payable {
-          
+    function requestTokens(address recipient) public payable {
         require(
             msg.sender != address(0),
             "Request must not originate from a zero account"
@@ -39,16 +37,11 @@ contract Faucet {
             token.balanceOf(address(this)) >= withdrawalAmount,
             "Insufficient balance in faucet for withdrawal request"
         );
-        require(
-            block.timestamp >= nextAccessTime[msg.sender],
-            "Insufficient time elapsed since last withdrawal - try again later."
-        );
+        
 
-        nextAccessTime[msg.sender] = block.timestamp + lockTime;
+        token.transfer(recipient, withdrawalAmount); // Transfer tokens to the specified recipient
 
-        token.transfer(msg.sender, withdrawalAmount);
-
-        emit FeePaid(msg.sender, msg.value);
+        emit Withdrawal(recipient, withdrawalAmount); // Emit Withdrawal event for the specified recipient
     }
 
     receive() external payable {
@@ -66,8 +59,6 @@ contract Faucet {
     function setLockTime(uint256 amount) public onlyOwner {
         lockTime = amount * 1 minutes;
     }
-
-   
 
     function withdraw() external onlyOwner {
         emit Withdrawal(msg.sender, token.balanceOf(address(this)));
